@@ -53,14 +53,18 @@ namespace WeatherNavigator
                 var humid_tonight = top.Div(1).Div(2).Div(16).Div(6).Div(1).InnerText;
 
                 StringBuilder builder = new StringBuilder();
-                builder.Append("Today Temperature: ").Append(temp_today).Append(Environment.NewLine); 
-                builder.Append("Today Wind: ").Append(wind_today).Append(Environment.NewLine);
-                builder.Append("Today Humidity: ").Append(humid_today).Append(Environment.NewLine);
+                builder.Append("TODAY").Append(Environment.NewLine);
+                builder.Append("=====").Append(Environment.NewLine);
+                builder.Append("Temperature: ").Append(temp_today).Append(Environment.NewLine); 
+                builder.Append("Wind: ").Append(wind_today).Append(Environment.NewLine);
+                builder.Append("Humidity: ").Append(humid_today).Append(Environment.NewLine);
                 builder.Append(Environment.NewLine);
-                builder.Append("Tonight Temperature: ").Append(temp_tonight).Append(Environment.NewLine); 
-                builder.Append("Tonight Wind: ").Append(wind_tonight).Append(Environment.NewLine);
-                builder.Append("Tonight Humidity: ").Append(humid_tonight).Append(Environment.NewLine);
-                MessageBox.Show(builder.ToString());
+                builder.Append("TONIGHT").Append(Environment.NewLine);
+                builder.Append("=======").Append(Environment.NewLine);
+                builder.Append("Temperature: ").Append(temp_tonight).Append(Environment.NewLine); 
+                builder.Append("Wind: ").Append(wind_tonight).Append(Environment.NewLine);
+                builder.Append("Humidity: ").Append(humid_tonight).Append(Environment.NewLine);
+                MessageBox.Show(builder.ToString(), "Weather for " + "32701");
             }
         }
     }
