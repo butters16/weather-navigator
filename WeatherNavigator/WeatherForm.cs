@@ -48,19 +48,16 @@ namespace WeatherNavigator
         {
             var top = webBrowser.Document.GetElementById("wx-forecast-container");
 
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[7]/div[1]/span[1] (ex: <span itemprop="temperature-fahrenheit">58</span>)
             //*[@id="wx-forecast-container"]/div[1]/div[2]/div[8]/div[1] (ex: <div class="wx-temperature">75<span class="wx-degrees">°</span></div>)
             //*[@id="wx-forecast-container"]/div[1]/div[2]/div[9]/div[1] (ex: <div class="wx-temperature">51<span class="wx-degrees">°</span></div>)
             var temp_today = top.Div(1).Div(2).Div(8).Div(1).InnerText;
             var temp_tonight = top.Div(1).Div(2).Div(9).Div(1).InnerText;
 
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[1]/div/div/span (ex: <span class="wx-temp">Calm</span>)
             //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[2]/div/div[2] (ex: <div class="wx-wind-label">E at 6 mph</div>)
             //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[3]/div/div[2] (ex: <div class="wx-wind-label">NE at 7 mph</div>)
             var wind_today = top.Div(1).Div(2).Div(16).Div(2).Div(1).Div(2).InnerText;
             var wind_tonight = top.Div(1).Div(2).Div(16).Div(3).Div(1).Div(2).InnerText;
 
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[4]/div (ex: <div class="wx-data">100%</div>)
             //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[5]/div (ex: <div class="wx-data">59%</div>)
             //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[6]/div (ex: <div class="wx-data">88%</div>)
             var humid_today = top.Div(1).Div(2).Div(16).Div(5).Div(1).InnerText;
