@@ -46,37 +46,23 @@ namespace WeatherNavigator
 
         private void ProcessSecondPage()
         {
-            var top = webBrowser.Document.GetElementById("wx-forecast-container");
-
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[8]/div[1] (ex: <div class="wx-temperature">75<span class="wx-degrees">°</span></div>)
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[9]/div[1] (ex: <div class="wx-temperature">51<span class="wx-degrees">°</span></div>)
-            var temp_today = top.Div(1).Div(2).Div(8).Div(1).InnerText;
-            var temp_tonight = top.Div(1).Div(2).Div(9).Div(1).InnerText;
-
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[2]/div/div[2] (ex: <div class="wx-wind-label">E at 6 mph</div>)
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[3]/div/div[2] (ex: <div class="wx-wind-label">NE at 7 mph</div>)
-            var wind_today = top.Div(1).Div(2).Div(16).Div(2).Div(1).Div(2).InnerText;
-            var wind_tonight = top.Div(1).Div(2).Div(16).Div(3).Div(1).Div(2).InnerText;
-
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[5]/div (ex: <div class="wx-data">59%</div>)
-            //*[@id="wx-forecast-container"]/div[1]/div[2]/div[16]/div[6]/div (ex: <div class="wx-data">88%</div>)
-            var humid_today = top.Div(1).Div(2).Div(16).Div(5).Div(1).InnerText;
-            var humid_tonight = top.Div(1).Div(2).Div(16).Div(6).Div(1).InnerText;
+            Weather todayWeather = DocumentParser.ParseToday(webBrowser.Document);
+            Weather tonightWeather = DocumentParser.ParseTonight(webBrowser.Document);
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("TODAY").Append(Environment.NewLine);
-            builder.Append("=====").Append(Environment.NewLine);
-            builder.Append("Temperature: ").Append(temp_today).Append(Environment.NewLine);
-            builder.Append("Wind: ").Append(wind_today).Append(Environment.NewLine);
-            builder.Append("Humidity: ").Append(humid_today).Append(Environment.NewLine);
+            AppendWeather(todayWeather, "TODAY", builder);
             builder.Append(Environment.NewLine);
-            builder.Append("TONIGHT").Append(Environment.NewLine);
-            builder.Append("=======").Append(Environment.NewLine);
-            builder.Append("Temperature: ").Append(temp_tonight).Append(Environment.NewLine);
-            builder.Append("Wind: ").Append(wind_tonight).Append(Environment.NewLine);
-            builder.Append("Humidity: ").Append(humid_tonight).Append(Environment.NewLine);
+            AppendWeather(tonightWeather, "TONIGHT", builder);
             MessageBox.Show(builder.ToString(), "Weather for " + zipString);
         }
 
+        private void AppendWeather(Weather weather, string day, StringBuilder builder)
+        {
+            builder.Append(day).Append(Environment.NewLine);
+            builder.Append("=====").Append(Environment.NewLine);
+            builder.Append("Temperature: ").Append(weather.temperature).Append(Environment.NewLine);
+            builder.Append("Wind: ").Append(weather.wind).Append(Environment.NewLine);
+            builder.Append("Humidity: ").Append(weather.humidity).Append(Environment.NewLine);
+        }
     }
 }
